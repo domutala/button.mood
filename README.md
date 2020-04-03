@@ -71,6 +71,13 @@ After that you can use the component in your code as follows.
 
 ## Props
 
+### tag
+
+- **type**: _string_
+- **default**: _'button'_
+
+Cette propriété prend comme valeur toute balise html valide ou composant Vue.js tel que **router-link**.
+
 ### type
 
 - **type**: _string_
