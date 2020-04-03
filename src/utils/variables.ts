@@ -26,24 +26,50 @@ export interface ButtonStyle {
   boxShadow?: string;
 }
 
-export interface PaddingOptions {
+export interface PaddingValueOptions {
   x: number;
   y: number;
 }
-
+export interface PaddingOptions {
+  default: PaddingValueOptions;
+  sm: PaddingValueOptions;
+  md: PaddingValueOptions;
+  lg: PaddingValueOptions;
+  xl: PaddingValueOptions;
+}
+export interface ValueOptions {
+  default: number;
+  sm: number;
+  md: number;
+  lg: number;
+  xl: number;
+}
+export interface RoundedOptions {
+  default: number;
+  scare: number;
+  sm: number;
+  lg: number;
+  pill: number;
+  circle: number;
+}
+export interface BoxShadowOptions {
+  default: string;
+  sm: string;
+  lg: string;
+}
 export interface ButtonOptions {
   color?: any;
-  lightColor: any;
-  darkColor: any;
-  padding: { [key: string]: PaddingOptions };
-  size: { [key: string]: number };
-  fontSize: { [key: string]: number };
-  lineHeight: { [key: string]: number };
-  rounded: { [key: string]: number };
-  boxShadow: { [key: string]: string };
-  borderWidth: number;
-  elevate: number;
-  scale: number;
+  lightColor?: any;
+  darkColor?: any;
+  padding?: PaddingOptions;
+  size?: ValueOptions;
+  fontSize?: ValueOptions;
+  lineHeight?: ValueOptions;
+  rounded?: RoundedOptions;
+  boxShadow?: BoxShadowOptions;
+  borderWidth?: number;
+  elevate?: number;
+  scale?: number;
 }
 
 export const buttonOptions: ButtonOptions = {

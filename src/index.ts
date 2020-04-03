@@ -1,7 +1,6 @@
 import * as mComponents from './components';
-import { ButtonOptions, buttonOptions } from '@/utils/variables';
-
-export const MdButton = mComponents.MdButton;
+import { buttonOptions } from '@/utils/variables';
+export { ButtonOptions } from '@/utils/variables';
 
 const install = (Vue: any, options: any = {}) => {
   // Components
@@ -24,5 +23,5 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-// export default install
+export const MdButton = mComponents.MdButton;
 export default install;

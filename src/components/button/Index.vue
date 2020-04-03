@@ -458,7 +458,9 @@ export default class MdButton extends Vue {
   @Watch('color')
   @Watch('type')
   private init() {
-    this.btnOptions = this.$mdBtn;
+    if (this.$mdBtn) {
+      this.btnOptions = this.$mdBtn;
+    }
 
     setTimeout(() => {
       this.setSize();

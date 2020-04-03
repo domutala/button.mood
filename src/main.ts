@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
-import component from './index';
+import component, { ButtonOptions } from './index';
 
-const btnOptions = {
+const btnOptions: ButtonOptions = {
   color: '#fcdc2a',
   borderWidth: 2
 };

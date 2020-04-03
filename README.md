@@ -29,10 +29,15 @@ Button.mood is very simple to use.
 
 ```Javascript
 import Vue from 'vue';
-import button from 'button.mood';
+import MdButton, { ButtonOptions } from 'button.mood';
 import 'button.mood/dist/button.css';
 
-Vue.use(button);
+const btnOptions = {
+  color: '#fcdc2a',
+  borderWidth: 2,
+};
+
+Vue.use(MdButton, btnOptions);
 ```
 
 ### Single file
