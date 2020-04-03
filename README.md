@@ -120,7 +120,7 @@ We use the **[color](https://github.com/Qix-/color)** library to manage colors. 
 
 ### router props
 
-Si vous voulez que le composant se comporte comme le composant native de _vue-router_, _router-link_, définissez la propriété _tag_ à _'router-link'_.
+Si vous voulez que le composant se comporte comme le composant native de **[vue-router](https://router.vuejs.org/)**, **router-link**, définissez la propriété _tag_ à _'router-link'_.
 
 You can set all the properties of _router-link_ provided that these are preceded by the word _'router -'_. For example instead of putting _to_ you put _router-to_, instead of _active-class_, put _router-active-class_, instead of _tag_, _router-tag_. You can see all the properties of _'router-link'_ [here](https://router.vuejs.org/api/#router-link-props).
 
