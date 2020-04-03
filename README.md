@@ -32,7 +32,7 @@ import Vue from 'vue';
 import MdButton, { ButtonOptions } from 'button.mood';
 import 'button.mood/dist/button.css';
 
-const btnOptions = {
+const btnOptions: ButtonOptions = {
   color: '#fcdc2a',
   borderWidth: 2,
 };
