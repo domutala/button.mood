@@ -244,8 +244,8 @@ export default class MdButton extends Vue {
       if (this.btnOptions.size && this.btnOptions.size[param]) {
         const size = this.btnOptions.size[param];
         this.style.padding = '0';
-        this.style.width = this.ssu(param);
-        this.style.height = this.ssu(param);
+        this.style.width = this.ssu(size);
+        this.style.height = this.ssu(size);
       }
     } else if (this.size !== null) {
       if (this.btnOptions.padding && this.btnOptions.padding[param]) {
@@ -282,7 +282,7 @@ export default class MdButton extends Vue {
 
             if (icon.tagName === 'svg' || icon.tagName === 'img') {
               i.style.width = this.ssu(fontSize * 1.4);
-              i.style.height = this.ssu(lineHeight * 1.3);
+              i.style.height = this.ssu(fontSize * 1.3);
             } else {
               i.style.fontSize = this.ssu(fontSize * 1.4);
               i.style.lineHeight = `1`;
