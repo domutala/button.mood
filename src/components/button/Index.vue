@@ -31,7 +31,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import { buttonOptions, ButtonStyle } from '@/utils/variables';
+import {
+  buttonOptions,
+  ButtonStyle,
+  PossiblesRoundedValues,
+  PossiblesBoxShadowValues,
+  PossiblesValues
+} from '@/utils/variables';
 import { ripple } from '@/utils/ripple';
 import Color from 'color';
 import '@/assets/styles/index.scss';
@@ -232,48 +238,67 @@ export default class MdButton extends Vue {
   }
 
   private setSize() {
+    const param: PossiblesValues = this.size;
+
     if (this.iconOnly) {
-      this.style.padding = '0';
-      this.style.width = this.ssu(this.btnOptions.size[this.size]);
-      this.style.height = this.ssu(this.btnOptions.size[this.size]);
+      if (this.btnOptions.size && this.btnOptions.size[param]) {
+        const size = this.btnOptions.size[param];
+        this.style.padding = '0';
+        this.style.width = this.ssu(param);
+        this.style.height = this.ssu(param);
+      }
     } else if (this.size !== null) {
-      this.style.paddingTop = this.ssu(this.btnOptions.padding[this.size].y);
-      this.style.paddingBottom = this.ssu(this.btnOptions.padding[this.size].y);
-      this.style.paddingLeft = this.ssu(this.btnOptions.padding[this.size].x);
-      this.style.paddingRight = this.ssu(this.btnOptions.padding[this.size].x);
+      if (this.btnOptions.padding && this.btnOptions.padding[param]) {
+        const padding = this.btnOptions.padding[param];
+        this.style.paddingTop = this.ssu(padding.y);
+        this.style.paddingBottom = this.ssu(padding.y);
+        this.style.paddingLeft = this.ssu(padding.x);
+        this.style.paddingRight = this.ssu(padding.x);
+      }
     }
   }
 
   private setFontSize() {
     const icons = this.$el.querySelectorAll('.icon');
     if (this.size !== null) {
-      this.style.fontSize = this.ssu(this.btnOptions.fontSize[this.size]);
-      this.style.lineHeight = String(this.btnOptions.lineHeight[this.size]);
+      const param: PossiblesValues = this.size;
 
-      // icons
-      if (icons.length) {
-        icons.forEach(icon => {
-          const i = icon as HTMLElement;
+      if (
+        this.btnOptions.fontSize &&
+        this.btnOptions.fontSize[param] &&
+        this.btnOptions.lineHeight &&
+        this.btnOptions.lineHeight[param]
+      ) {
+        const fontSize = this.btnOptions.fontSize[param];
+        const lineHeight = this.btnOptions.lineHeight[param];
 
-          if (icon.tagName === 'svg' || icon.tagName === 'img') {
-            i.style.width = this.ssu(this.btnOptions.fontSize[this.size] * 1.4);
-            i.style.height = this.ssu(
-              this.btnOptions.fontSize[this.size] * 1.3
-            );
-          } else {
-            i.style.fontSize = this.ssu(
-              this.btnOptions.fontSize[this.size] * 1.4
-            );
-            i.style.lineHeight = `1`;
-          }
-        });
+        this.style.fontSize = this.ssu(fontSize);
+        this.style.lineHeight = String(lineHeight);
+
+        // icons
+        if (icons.length) {
+          icons.forEach(icon => {
+            const i = icon as HTMLElement;
+
+            if (icon.tagName === 'svg' || icon.tagName === 'img') {
+              i.style.width = this.ssu(fontSize * 1.4);
+              i.style.height = this.ssu(lineHeight * 1.3);
+            } else {
+              i.style.fontSize = this.ssu(fontSize * 1.4);
+              i.style.lineHeight = `1`;
+            }
+          });
+        }
       }
     }
   }
 
   private initRounded() {
     if (this.rounded !== null) {
-      this.style.borderRadius = this.ssu(this.btnOptions.rounded[this.rounded]);
+      const param: PossiblesRoundedValues = this.rounded;
+      if (this.btnOptions.rounded && this.btnOptions.rounded[param]) {
+        this.style.borderRadius = this.ssu(this.btnOptions.rounded[param]);
+      }
     }
   }
 
@@ -412,8 +437,12 @@ export default class MdButton extends Vue {
       } else if (this.onHover === 'scale') {
         this.style.transform = `scale(${this.btnOptions.scale})`;
       } else {
-        const params = this.onHover.split('-')[1] || 'default';
-        this.style.boxShadow = this.btnOptions.boxShadow[params];
+        // box-shadow
+        const params: PossiblesBoxShadowValues =
+          this.onHover.split('-')[1] || 'default';
+        if (this.btnOptions.boxShadow && this.btnOptions.boxShadow[params]) {
+          this.style.boxShadow = this.btnOptions.boxShadow[params];
+        }
       }
     }
   }

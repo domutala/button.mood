@@ -76,7 +76,7 @@ After that you can use the component in your code as follows.
 - **type**: _string_
 - **default**: _'button'_
 
-Cette propriété prend comme valeur toute balise html valide ou composant Vue.js tel que **router-link**.
+This property takes as value any valid html tag or Vue.js component such as **router-link**.
 
 ### type
 

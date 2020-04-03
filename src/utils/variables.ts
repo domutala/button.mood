@@ -1,3 +1,20 @@
+export type PossiblesValues = 'default' | 'sm' | 'md' | 'lg' | 'xl';
+export type PossiblesRoundedValues =
+  | 'default'
+  | 'scare'
+  | 'sm'
+  | 'lg'
+  | 'pill'
+  | 'circle';
+export type PossiblesBoxShadowValues = 'default' | 'sm' | 'lg';
+export type PossiblesTypeValue =
+  | 'default'
+  | 'relief'
+  | 'outline'
+  | 'circle'
+  | 'scare'
+  | 'relief';
+
 export interface ButtonStyle {
   backgroundColor: string;
   color: string;
