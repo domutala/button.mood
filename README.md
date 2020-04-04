@@ -105,13 +105,25 @@ We use the **[color](https://github.com/Qix-/color)** library to manage colors. 
 ### on-hover
 
 - **type**: _any_
-- **value**: _'elevate'_ | _'scale'_ | _'shadow'_ | _'shadow-sm'_ | _'shadow-lg'_ | _null_
+- **value**: _'elevate'_ | _'scale'_ | _'shadow'_ | _'shadow-sm'_ | _'shadow-null'_ | _'shadow-lg'_ | _null_
+
+### shadow
+
+- **type**: _string_ | _boolean_
+- **value**: _'true'_ | _'sm'_ | _'lg'_ | _null_
+
+### transparent
+
+- **type**: _number_
+- **value**: _0 <= value >= 1_
 
 ### block
 
 - **type**: _boolean_
 - **value**: _true'_ | _false'_
 - **default**: _false_
+
+If the value is true, the component will be of type block
 
 ### no-border
 
@@ -127,7 +139,7 @@ We use the **[color](https://github.com/Qix-/color)** library to manage colors. 
 
 ### router props
 
-Si vous voulez que le composant se comporte comme le composant native de **[vue-router](https://router.vuejs.org/)**, **router-link**, définissez la propriété _tag_ à _'router-link'_.
+If you want the component to behave like the native component of **[vue-router](https://router.vuejs.org/)**, **router-link**, set the property _tag_ to _'router-link'_.
 
 You can set all the properties of _router-link_ provided that these are preceded by the word _'router -'_. For example instead of putting _to_ you put _router-to_, instead of _active-class_, put _router-active-class_, instead of _tag_, _router-tag_. You can see all the properties of _'router-link'_ [here](https://router.vuejs.org/api/#router-link-props).
 

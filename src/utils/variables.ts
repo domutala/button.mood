@@ -1,18 +1,18 @@
 export type PossiblesValues = 'default' | 'sm' | 'md' | 'lg' | 'xl';
 export type PossiblesRoundedValues =
   | 'default'
-  | 'scare'
+  | 'square'
   | 'sm'
   | 'lg'
   | 'pill'
   | 'circle';
-export type PossiblesBoxShadowValues = 'default' | 'sm' | 'lg';
+export type PossiblesBoxShadowValues = 'default' | 'sm' | 'lg' | 'null';
 export type PossiblesTypeValue =
   | 'default'
   | 'relief'
   | 'outline'
   | 'circle'
-  | 'scare'
+  | 'square'
   | 'relief';
 
 export interface ButtonStyle {
@@ -63,7 +63,7 @@ export interface ValueOptions {
 }
 export interface RoundedOptions {
   default: number;
-  scare: number;
+  square: number;
   sm: number;
   lg: number;
   pill: number;
@@ -73,6 +73,7 @@ export interface BoxShadowOptions {
   default: string;
   sm: string;
   lg: string;
+  null: string;
 }
 export interface ButtonOptions {
   color?: any;
@@ -95,48 +96,49 @@ export const buttonOptions: ButtonOptions = {
   padding: {
     default: {
       x: 13,
-      y: 9
+      y: 9,
     },
     sm: { x: 3, y: 3 },
     md: { x: 5, y: 5 },
     lg: { x: 15, y: 9 },
-    xl: { x: 20, y: 11 }
+    xl: { x: 20, y: 11 },
   },
   fontSize: {
     default: 14,
     sm: 11,
     md: 13,
     lg: 20,
-    xl: 28
+    xl: 28,
   },
   lineHeight: {
     default: 1.4,
     sm: 1,
     md: 1.2,
     lg: 1.6,
-    xl: 1.8
+    xl: 1.8,
   },
   size: {
     default: 37,
     sm: 19,
     md: 27,
     lg: 52,
-    xl: 72
+    xl: 72,
   },
   rounded: {
     default: 6,
-    scare: 0,
+    square: 0,
     sm: 3,
     lg: 8,
     pill: 100,
-    circle: 1000
+    circle: 1000,
   },
   boxShadow: {
     default: '0 6px 12px 0 rgba(0,0,0,.25)',
     sm: '0 2px 4px 0 rgba(0,0,0,.15)',
-    lg: '0 16px 32px 0 rgba(0,0,0,.25)'
+    lg: '0 16px 32px 0 rgba(0,0,0,.25)',
+    null: 'none',
   },
   borderWidth: 1,
   elevate: -3,
-  scale: 1.2
+  scale: 1.2,
 };

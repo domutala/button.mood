@@ -9,7 +9,7 @@
       'with-icon': withIcon,
       block: block,
       link: type === 'link',
-      relief: type === 'relief'
+      relief: type === 'relief',
     }"
     :style="style"
     :hidden="hidden"
@@ -36,7 +36,7 @@ import {
   ButtonStyle,
   PossiblesRoundedValues,
   PossiblesBoxShadowValues,
-  PossiblesValues
+  PossiblesValues,
 } from '@/utils/variables';
 import { ripple } from '@/utils/ripple';
 import Color from 'color';
@@ -51,7 +51,8 @@ export default class MdButton extends Vue {
   @Prop({
     type: String,
     default: 'default',
-    validator: value => ['default', 'outline', 'link', 'relief'].includes(value)
+    validator: (value) =>
+      ['default', 'outline', 'link', 'relief'].includes(value),
   })
   private type: any;
 
@@ -59,7 +60,7 @@ export default class MdButton extends Vue {
   @Prop({
     type: String,
     default: 'default',
-    validator: value => ['sm', 'lg', 'md', 'xl', 'default'].includes(value)
+    validator: (value) => ['sm', 'lg', 'md', 'xl', 'default'].includes(value),
   })
   private size: any;
 
@@ -67,14 +68,22 @@ export default class MdButton extends Vue {
   @Prop({
     type: String,
     default: 'default',
-    validator: value =>
-      ['scare', 'sm', 'lg', 'pill', 'circle', 'default'].includes(value)
+    validator: (value) =>
+      ['square', 'sm', 'lg', 'pill', 'circle', 'default'].includes(value),
   })
   private rounded: any;
 
   // color
   @Prop({ type: String })
   private color: any;
+
+  // color
+  @Prop({
+    type: Number,
+    default: 1,
+    validator: (value) => value >= 0 && value <= 1,
+  })
+  private transparent: any;
 
   // icon
   @Prop({ type: Boolean })
@@ -84,12 +93,26 @@ export default class MdButton extends Vue {
 
   // on-hover
   @Prop({
-    validator: value =>
-      ['elevate', 'scale', 'shadow', 'shadow-sm', 'shadow-lg', null].includes(
-        value
-      )
+    validator: (value) =>
+      [
+        'elevate',
+        'scale',
+        'shadow',
+        'shadow-sm',
+        'shadow-lg',
+        'shadow-null',
+        null,
+      ].includes(value),
   })
   private onHover: any;
+
+  // on-hover
+  @Prop({
+    type: [Boolean || String],
+    default: null,
+    validator: (value) => [true, 'sm', 'lg', null].includes(value),
+  })
+  private shadow: any;
 
   @Prop({ type: Boolean })
   private noBorder: any;
@@ -145,7 +168,7 @@ export default class MdButton extends Vue {
     borderRadius: '',
     borderColor: '',
     borderStyle: '',
-    opacity: ''
+    opacity: '',
   };
   private btnOptions = buttonOptions;
 
@@ -222,7 +245,7 @@ export default class MdButton extends Vue {
       },
       touchend: (event: any) => {
         this.$emit('touchend', event);
-      }
+      },
     };
   }
   private get el() {
@@ -277,7 +300,7 @@ export default class MdButton extends Vue {
 
         // icons
         if (icons.length) {
-          icons.forEach(icon => {
+          icons.forEach((icon) => {
             const i = icon as HTMLElement;
 
             if (icon.tagName === 'svg' || icon.tagName === 'img') {
@@ -324,13 +347,15 @@ export default class MdButton extends Vue {
     if (this.getColor) {
       const icons = this.$el.querySelectorAll('.icon');
       const color = Color(this.getColor);
-      const colorYiq = color.isLight() ? '#000' : '#fff';
+      const colorYiq = color.isLight()
+        ? this.btnOptions.darkColor
+        : this.btnOptions.lightColor;
       const yiqValues = ['outline', 'link'];
 
       // bg-color
       const bgColor = yiqValues.includes(this.type)
-        ? this.btnOptions.lightColor
-        : color.toString();
+        ? 'transparent'
+        : color.alpha(this.transparent).toString();
 
       // text-color
       const textColor = yiqValues.includes(this.type)
@@ -339,7 +364,9 @@ export default class MdButton extends Vue {
 
       // border-color
       const bdColor =
-        this.type === 'link' ? 'transparent' : color.darken(0.1).toString();
+        this.type === 'link'
+          ? 'transparent'
+          : color.darken(0.1).alpha(this.transparent).toString();
 
       this.style.backgroundColor = bgColor;
       this.style.color = textColor;
@@ -347,7 +374,7 @@ export default class MdButton extends Vue {
 
       // icon
       if (icons.length) {
-        icons.forEach(icon => {
+        icons.forEach((icon) => {
           const i = icon as HTMLElement;
           if (icon.tagName === 'svg') {
             i.style.fill = textColor;
@@ -375,15 +402,17 @@ export default class MdButton extends Vue {
     if (this.getColor) {
       const icons = this.$el.querySelectorAll('.icon');
       const color = Color(this.getColor);
-      const colorYiq = color.isLight() ? '#000' : '#fff';
+      const colorYiq = color.isLight()
+        ? this.btnOptions.darkColor
+        : this.btnOptions.lightColor;
 
       // bg-color
       const bgColor =
         this.type === 'outline'
-          ? color.toString()
+          ? color.alpha(this.transparent).toString()
           : this.type === 'link'
-          ? this.btnOptions.lightColor
-          : color.darken(0.2).toString();
+          ? 'transparent'
+          : color.alpha(this.transparent).darken(0.2).toString();
 
       // text-color
       const textColor = this.type === 'link' ? color.toString() : colorYiq;
@@ -393,7 +422,7 @@ export default class MdButton extends Vue {
 
       // icon
       if (icons.length) {
-        icons.forEach(icon => {
+        icons.forEach((icon) => {
           const i = icon as HTMLElement;
           if (icon.tagName === 'svg') {
             i.style.fill = textColor;
@@ -419,13 +448,28 @@ export default class MdButton extends Vue {
     }
   }
 
+  private initBoxShadow() {
+    if (this.shadow || this.shadow === null) {
+      const param: PossiblesBoxShadowValues =
+        this.shadow === true
+          ? 'default'
+          : this.shadow === null
+          ? 'null'
+          : this.shadow;
+
+      if (this.btnOptions.boxShadow && this.btnOptions.boxShadow[param]) {
+        this.style.boxShadow = this.btnOptions.boxShadow[param];
+      }
+    }
+  }
+
   private setOnHover() {
     if (this.onHover) {
       this.initOnHover();
     }
   }
   private initOnHover() {
-    this.style.boxShadow = undefined;
+    this.initBoxShadow();
     this.style.transform = undefined;
   }
   private OnHoverTransformation() {
@@ -470,10 +514,7 @@ export default class MdButton extends Vue {
 
   private click() {
     if (this.getColor) {
-      const color = Color(this.getColor)
-        .alpha(0.2)
-        .darken(0.5)
-        .toString();
+      const color = Color(this.getColor).alpha(0.2).darken(0.5).toString();
       ripple(this.el, event, color);
     }
   }

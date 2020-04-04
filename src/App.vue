@@ -47,7 +47,12 @@
       <md-button>
         Default
       </md-button>
-      <md-button size="lg">
+      <md-button
+        size="lg"
+        :transparent="0.5"
+        shadow="sm"
+        on-hover="shadow-null"
+      >
         Large
       </md-button>
       <md-button size="xl">
@@ -180,8 +185,8 @@
     </div>
 
     <div class="container">
-      <md-button with-icon rounded="scare">
-        rounded scare
+      <md-button with-icon rounded="square">
+        rounded square
       </md-button>
       <md-button with-icon rounded="sm">
         rounded sm

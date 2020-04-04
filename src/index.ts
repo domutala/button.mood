@@ -1,6 +1,6 @@
 import * as mComponents from './components';
-import { buttonOptions } from '@/utils/variables';
-export { ButtonOptions } from '@/utils/variables';
+import { buttonOptions } from './utils/variables';
+export { ButtonOptions } from './utils/variables';
 
 const install = (Vue: any, options: any = {}) => {
   // Components
