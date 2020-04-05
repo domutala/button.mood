@@ -8,7 +8,7 @@ Button.mood is an intelligent button component designed with Vue.js. It can be i
 
 ## Documentation
 
-[Documentation](https://domutala.github.io/button-mood)
+[Documentation](https://domutala.github.io/button.mood)
 
 ## Installing
 
